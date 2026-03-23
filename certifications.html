@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Varun Gupta | Certifications</title>
+    <link rel="stylesheet" href="assets/shared.css">
+    <style>
+        .certs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .cert-card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            cursor: none; /* handled by shared.js */
+        }
+
+        .cert-card:hover {
+            background: rgba(255,255,255,0.04);
+        }
+
+        .cert-card.disabled {
+            opacity: 0.6;
+            cursor: not-allowed !important;
+            pointer-events: none;
+        }
+
+        .status-badge {
+            position: absolute;
+            top: 1.5rem; right: 1.5rem;
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .status-verified { color: var(--gold); }
+        .status-progress { color: var(--text2); }
+
+        .cert-icon {
+            width: 50px; height: 50px;
+            background: var(--gold-dim);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .cert-title {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .cert-issuer {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .cert-date {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text3);
+            margin-top: -0.5rem;
+        }
+
+        .cert-desc {
+            color: var(--text2);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .course-list {
+            list-style: none;
+            margin-top: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .course-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            color: var(--text2);
+            font-size: 0.9rem;
+        }
+        .course-list li::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0.5rem;
+            width: 6px; height: 6px;
+            background: var(--gold);
+            border-radius: 50%;
+        }
+
+        .cert-actions {
+            margin-top: auto;
+            padding-top: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .btn-view {
+            background: rgba(201,168,76,0.15);
+            color: var(--gold-light);
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(201,168,76,0.3);
+            font-weight: 600;
+        }
+        .cert-card:not(.disabled):hover .btn-view {
+            background: var(--gold);
+            color: var(--bg);
+        }
+
+        .verify-link {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text2);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .verify-link:hover {
+            color: var(--gold);
+        }
+
+        /* Modal */
+        #pdf-modal {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+        #pdf-modal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        .modal-box {
+            width: min(900px, 96vw);
+            height: min(750px, 92vh);
+            background: var(--bg2);
+            border: 1px solid var(--glass-border);
+            border-radius: 18px;
+            display: flex;
+            flex-direction: column;
+            transform: scale(0.95);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+            position: relative;
+        }
+        #pdf-modal.active .modal-box {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--glass-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255,255,255,0.02);
+        }
+
+        .modal-title-area {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+        .modal-title {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+        .modal-subtitle {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--gold);
+            text-transform: uppercase;
+        }
+
+        .modal-actions {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        .m-link {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text2);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .m-link:hover { color: var(--gold); }
+        .m-close {
+            background: transparent;
+            border: none;
+            color: var(--text);
+            font-size: 1.5rem;
+            cursor: none;
+            transition: color 0.3s ease;
+        }
+        .m-close:hover { color: var(--gold); }
+
+        .modal-body {
+            flex: 1;
+            position: relative;
+            background: #1e1e1e; /* dark bg for iframe */
+        }
+        .modal-body iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .spinner {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px; height: 40px;
+            border: 3px solid rgba(255,255,255,0.1);
+            border-top-color: var(--gold);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 100% { transform: translate(-50%, -50%) rotate(360deg); } }
+
+        @media (max-width: 900px) {
+            .certs-grid { grid-template-columns: 1fr; }
+            .modal-actions { gap: 1rem; }
+            .m-link { display: none; } /* hide extra links on mobile for space */
+        }
+    </style>
+</head>
+<body>
+    <div class="orb orb-gold"></div>
+    <div class="orb orb-blue"></div>
+
+    <nav>
+        <a href="index.html" class="nav-logo">
+            <div class="nav-logo-box">VG</div>
+            Varun Gupta
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="certifications.html" class="active">Certs</a></li>
+        </ul>
+        <a href="connect.html" class="nav-connect">Connect</a>
+    </nav>
+
+    <main class="page-wrap page-enter">
+        <div class="s-label reveal">Continuous Learning</div>
+        <h2 class="s-title reveal rd1">Professional<br>Certifications</h2>
+        <p class="s-sub reveal rd2">Verified credentials from industry leaders like IBM and Stanford demonstrating mastery of critical technical domains.</p>
+
+        <div class="certs-grid reveal rd3">
+            <!-- Cert 1 -->
+            <div class="glass-card cert-card clickable" data-pdf="certs/ibm-data-analyst.pdf" data-title="IBM Data Analyst Professional" data-issuer="IBM · Coursera" data-verify="https://coursera.org/verify/professional-cert/UFYJ8HJQYX3Q">
+                <div class="status-badge status-verified">✓ Verified</div>
+                <div class="cert-icon">📊</div>
+                <div class="cert-title">IBM Data Analyst Professional Certificate</div>
+                <div class="cert-issuer gradient-text">IBM · Coursera</div>
+                <div class="cert-date">Completed: June 25, 2024</div>
+                <div class="cert-desc">Detailed mastery over modern data analytics tools and advanced methodologies required for analyzing business data at scale.</div>
+                <ul class="course-list">
+                    <li>Data Analysis with Python</li>
+                    <li>Databases and SQL for Data Science</li>
+                    <li>Data Visualization & Dashboards</li>
+                </ul>
+                <div class="cert-actions">
+                    <button class="btn-view">View Certificate</button>
+                    <a href="https://coursera.org/verify/professional-cert/UFYJ8HJQYX3Q" target="_blank" class="verify-link" onclick="event.stopPropagation()">↗ Verify</a>
+                </div>
+            </div>
+
+            <!-- Cert 2 -->
+            <div class="glass-card cert-card clickable" data-pdf="certs/deep-learning.pdf" data-title="Deep Learning Specialization" data-issuer="DeepLearning.AI · Andrew Ng" data-verify="https://coursera.org/verify/specialization/ZZBV23HCX6ZM">
+                <div class="status-badge status-verified">✓ Verified</div>
+                <div class="cert-icon">🔬</div>
+                <div class="cert-title">Deep Learning Specialization</div>
+                <div class="cert-issuer gradient-text">DeepLearning.AI · Andrew Ng</div>
+                <div class="cert-date">Completed: April 18, 2024</div>
+                <div class="cert-desc">Rigorous exploration of deep neural network architectures and mathematical foundations for cutting-edge AI capability.</div>
+                <ul class="course-list">
+                    <li>Neural Networks and Deep Learning</li>
+                    <li>Convolutional Neural Networks (CNNs)</li>
+                    <li>Sequence Models & Hyperparameter Tuning</li>
+                </ul>
+                <div class="cert-actions">
+                    <button class="btn-view">View Certificate</button>
+                    <a href="https://coursera.org/verify/specialization/ZZBV23HCX6ZM" target="_blank" class="verify-link" onclick="event.stopPropagation()">↗ Verify</a>
+                </div>
+            </div>
+
+            <!-- Cert 3 -->
+            <div class="glass-card cert-card clickable" data-pdf="certs/ml-specialization.pdf" data-title="Machine Learning Specialization" data-issuer="Stanford University" data-verify="https://coursera.org/verify/specialization/4YE47DGCSVTP">
+                <div class="status-badge status-verified">✓ Verified</div>
+                <div class="cert-icon">🧠</div>
+                <div class="cert-title">Machine Learning Specialization</div>
+                <div class="cert-issuer gradient-text">DeepLearning.AI · Stanford University</div>
+                <div class="cert-date">Completed: December 1, 2023</div>
+                <div class="cert-desc">Comprehensive curriculum covering fundamental ML models, unsupervised learning, and recommender systems.</div>
+                <ul class="course-list">
+                    <li>Supervised Machine Learning</li>
+                    <li>Advanced Learning Algorithms</li>
+                    <li>Unsupervised Learning & Recommenders</li>
+                </ul>
+                <div class="cert-actions">
+                    <button class="btn-view">View Certificate</button>
+                    <a href="https://coursera.org/verify/specialization/4YE47DGCSVTP" target="_blank" class="verify-link" onclick="event.stopPropagation()">↗ Verify</a>
+                </div>
+            </div>
+
+            <!-- Cert 4 Placeholder -->
+            <div class="glass-card cert-card disabled">
+                <div class="status-badge status-progress">⏳ In Progress</div>
+                <div class="cert-icon" style="color:var(--text2)">💼</div>
+                <div class="cert-title">Finance for Non-Finance Professionals</div>
+                <div class="cert-issuer" style="color:var(--text2)">TBD</div>
+                <div class="cert-date">Expected 2025</div>
+                <div class="cert-desc">Upcoming certification focusing on corporate finance, accounting principles, and financial statement analysis for technical leaders.</div>
+                <ul class="course-list">
+                    <li>Financial Accounting Principles</li>
+                    <li>Corporate Valuation Fundamentals</li>
+                </ul>
+                <div class="cert-actions">
+                    <button class="btn-view" style="color:var(--text3); border-color:var(--glass-border); background:var(--glass)">Coming Soon</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-left">© 2025 · Varun Gupta · Crafted with precision</div>
+        <div class="footer-links">
+            <a href="https://www.linkedin.com/in/varungupta004/" target="_blank">LinkedIn</a>
+            <a href="https://github.com/varungupta04" target="_blank">GitHub</a>
+            <a href="https://leetcode.com/u/varun_gupta_04/" target="_blank">LeetCode</a>
+        </div>
+    </footer>
+
+    <!-- PDF Modal -->
+    <div id="pdf-modal">
+        <div class="modal-box" id="modal-box">
+            <div class="modal-header">
+                <div class="modal-title-area">
+                    <span class="modal-title" id="m-title">Cert Name</span>
+                    <span class="modal-subtitle" id="m-issuer">Issuer Name</span>
+                </div>
+                <div class="modal-actions">
+                    <a href="#" target="_blank" class="m-link" id="m-verify">↗ Verify Online</a>
+                    <a href="#" download class="m-link" id="m-download">↓ Download</a>
+                    <button class="m-close" id="m-close-btn">&times;</button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="spinner" id="m-spinner"></div>
+                <iframe id="m-iframe" src="" onload="document.getElementById('m-spinner').style.display='none'"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/shared.js"></script>
+    <script>
+        const modal = document.getElementById('pdf-modal');
+        const modalBox = document.getElementById('modal-box');
+        const closeBtn = document.getElementById('m-close-btn');
+        const mTitle = document.getElementById('m-title');
+        const mIssuer = document.getElementById('m-issuer');
+        const mVerify = document.getElementById('m-verify');
+        const mDownload = document.getElementById('m-download');
+        const mIframe = document.getElementById('m-iframe');
+        const mSpinner = document.getElementById('m-spinner');
+
+        function openModal(pdf, title, issuer, verify) {
+            mTitle.textContent = title;
+            mIssuer.textContent = issuer;
+            mVerify.href = verify;
+            mDownload.href = pdf;
+            
+            mSpinner.style.display = 'block';
+            mIframe.src = pdf; // Will trigger onload to hide spinner
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            // Re-apply hover context to modal buttons
+            setTimeout(() => {
+                document.body.classList.remove('hovering');
+            }, 50);
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+            setTimeout(() => {
+                mIframe.src = ''; // Clear memory
+            }, 400);
+        }
+
+        // Attach listeners
+        document.querySelectorAll('.cert-card:not(.disabled)').forEach(card => {
+            card.addEventListener('click', () => {
+                openModal(
+                    card.dataset.pdf,
+                    card.dataset.title,
+                    card.dataset.issuer,
+                    card.dataset.verify
+                );
+            });
+        });
+
+        closeBtn.addEventListener('click', closeModal);
+        
+        modal.addEventListener('click', (e) => {
+            if(e.target === modal) closeModal();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if(e.key === 'Escape' && modal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

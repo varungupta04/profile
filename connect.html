@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Varun Gupta | Connect</title>
+    <link rel="stylesheet" href="assets/shared.css">
+    <style>
+        .connect-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            margin-top: 3rem;
+        }
+
+        /* Left Col */
+        .connect-bio {
+            color: var(--text2);
+            font-size: 1.15rem;
+            line-height: 1.7;
+            margin-bottom: 3rem;
+            max-width: 500px;
+        }
+
+        .social-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .soc-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.5rem;
+            text-decoration: none;
+            color: var(--text);
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .soc-card:hover {
+            transform: translateY(-4px);
+            background: rgba(255,255,255,0.06);
+        }
+
+        .soc-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .soc-icon {
+            width: 44px; height: 44px;
+            background: var(--gold-dim);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            font-size: 1.25rem;
+        }
+
+        .soc-titles {
+            display: flex;
+            flex-direction: column;
+        }
+        .soc-name {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        .soc-handle {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text2);
+        }
+
+        .soc-arrow {
+            font-size: 1.25rem;
+            color: var(--text2);
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        .soc-card:hover .soc-arrow {
+            transform: translate(2px, -2px);
+            color: var(--gold);
+        }
+
+        /* Right Col */
+        .avail-card {
+            background: linear-gradient(135deg, rgba(201,168,76,0.1), rgba(201,168,76,0.02));
+            border-color: rgba(201,168,76,0.3);
+            margin-bottom: 2rem;
+        }
+        .avail-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(201,168,76,0.15);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--gold-light);
+            margin-bottom: 1.5rem;
+        }
+        .avail-badge .dot {
+            width: 6px; height: 6px;
+            background: var(--gold);
+            border-radius: 50%;
+            animation: blink 2s infinite;
+        }
+        .avail-title {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .avail-desc {
+            color: var(--text2);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .interest-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .int-card {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+        }
+        .int-icon { font-size: 1.5rem; }
+        .int-name { font-family: var(--font-display); font-weight: 600; font-size: 0.95rem; }
+
+        .email-card {
+            text-align: center;
+            padding: 2rem;
+        }
+        .email-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text2);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+        .email-val {
+            font-family: var(--font-display);
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 700;
+            margin-bottom: 2rem;
+            word-break: break-all;
+        }
+
+        .btn-full {
+            width: 100%;
+            padding: 1.25rem;
+        }
+
+        @media (max-width: 900px) {
+            .connect-wrap { grid-template-columns: 1fr; gap: 4rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="orb orb-gold"></div>
+    <div class="orb orb-blue"></div>
+
+    <nav>
+        <a href="index.html" class="nav-logo">
+            <div class="nav-logo-box">VG</div>
+            Varun Gupta
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="certifications.html">Certs</a></li>
+        </ul>
+        <a href="connect.html" class="nav-connect">Connect</a>
+    </nav>
+
+    <main class="page-wrap page-enter">
+        <div class="s-label reveal">Reach Out</div>
+        <h2 class="s-title reveal rd1">Let's build<br>something great.</h2>
+
+        <div class="connect-wrap">
+            <div class="col-left">
+                <div class="connect-bio reveal rd2">
+                    <p style="margin-bottom: 1rem;">I'm currently engaged as an RPA Engineer, but I'm always open to exploring profound opportunities located firmly at the intersection of technology, finance, and strategy consulting.</p>
+                    <p>I would particularly love to chat about real-world applied ML, product strategy direction, full-stack architectures, or just about anything geared around solving big, meaningful problems through data.</p>
+                </div>
+
+                <div class="social-cards reveal rd3">
+                    <a href="https://www.linkedin.com/in/varungupta004/" target="_blank" class="glass-card soc-card">
+                        <div class="soc-info">
+                            <div class="soc-icon">in</div>
+                            <div class="soc-titles">
+                                <div class="soc-name">LinkedIn</div>
+                                <div class="soc-handle">/in/varungupta004</div>
+                            </div>
+                        </div>
+                        <div class="soc-arrow">↗</div>
+                    </a>
+                    <a href="https://github.com/varungupta04" target="_blank" class="glass-card soc-card">
+                        <div class="soc-info">
+                            <div class="soc-icon">gh</div>
+                            <div class="soc-titles">
+                                <div class="soc-name">GitHub</div>
+                                <div class="soc-handle">@varungupta04</div>
+                            </div>
+                        </div>
+                        <div class="soc-arrow">↗</div>
+                    </a>
+                    <a href="https://leetcode.com/u/varun_gupta_04/" target="_blank" class="glass-card soc-card">
+                        <div class="soc-info">
+                            <div class="soc-icon">lc</div>
+                            <div class="soc-titles">
+                                <div class="soc-name">LeetCode</div>
+                                <div class="soc-handle">varun_gupta_04</div>
+                            </div>
+                        </div>
+                        <div class="soc-arrow">↗</div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-right reveal rd4">
+                <div class="glass-card avail-card">
+                    <div class="avail-badge">
+                        <div class="dot"></div>
+                        Currently Available
+                    </div>
+                    <div class="avail-title">Open to the right opportunity.</div>
+                    <div class="avail-desc">Looking to collaborate on exciting ventures with ambitious teams. My multidisciplinary skillset brings a unique perspective tailored to both business and technical dimensions.</div>
+                </div>
+
+                <div class="interest-list">
+                    <div class="int-card">
+                        <div class="int-icon">📈</div>
+                        <div class="int-name">Data Science & ML Roles</div>
+                    </div>
+                    <div class="int-card">
+                        <div class="int-icon">💡</div>
+                        <div class="int-name">Tech + Finance + Consulting</div>
+                    </div>
+                    <div class="int-card">
+                        <div class="int-icon">🛠️</div>
+                        <div class="int-name">Side Project Collaborations</div>
+                    </div>
+                </div>
+
+                <div class="glass-card email-card">
+                    <div class="email-label">Send me an email directly</div>
+                    <!-- ⚠ NOTE: Replace this placeholder email address with real address before deploying -->
+                    <div class="email-val gradient-text">varungupta@example.com</div>
+                    <a href="mailto:varungupta@example.com" class="btn-gold btn-full">Send an Email</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-left">© 2025 · Varun Gupta · Crafted with precision</div>
+        <div class="footer-links">
+            <a href="https://www.linkedin.com/in/varungupta004/" target="_blank">LinkedIn</a>
+            <a href="https://github.com/varungupta04" target="_blank">GitHub</a>
+            <a href="https://leetcode.com/u/varun_gupta_04/" target="_blank">LeetCode</a>
+        </div>
+    </footer>
+
+    <script src="assets/shared.js"></script>
+</body>
+</html>

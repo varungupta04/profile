@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Varun Gupta | Portfolio</title>
+    <link rel="stylesheet" href="assets/shared.css">
+    <style>
+        .hero {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding-bottom: 6rem;
+            position: relative;
+        }
+        .live-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text2);
+            width: fit-content;
+            margin-bottom: 2rem;
+        }
+        .live-dot {
+            width: 6px; height: 6px;
+            background: var(--gold);
+            border-radius: 50%;
+            animation: blink 2s infinite;
+        }
+        .hero-name {
+            font-family: var(--font-display);
+            font-size: clamp(4rem, 11vw, 10.5rem);
+            font-weight: 800;
+            line-height: 0.85;
+            margin-bottom: 2rem;
+            letter-spacing: -0.02em;
+        }
+        .name-1 { color: #fff; display: block; }
+        .name-2 { display: block; margin-left: 0.5em; }
+        .name-3 { color: rgba(255,255,255,0.04); display: block; font-size: 0.7em; }
+        
+        .roles-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .role-pill {
+            padding: 0.6rem 1.25rem;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        .hero-desc {
+            font-size: 1.15rem;
+            color: var(--text2);
+            max-width: 650px;
+            margin-bottom: 3rem;
+            line-height: 1.6;
+        }
+        .hero-btns {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+        }
+        .stats-bar {
+            display: flex;
+            gap: 1rem;
+            max-width: 700px;
+            flex-wrap: wrap;
+        }
+        .stat-tile {
+            flex: 1;
+            min-width: 120px;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            padding: 1.25rem;
+        }
+        .stat-num {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        .stat-label {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: var(--text2);
+            text-transform: uppercase;
+        }
+        .social-strip {
+            position: fixed;
+            right: 2.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            z-index: 100;
+        }
+        .social-line {
+            width: 1px;
+            height: 60px;
+            background: var(--glass-border);
+        }
+        .social-strip a {
+            writing-mode: vertical-rl;
+            text-decoration: none;
+            color: var(--text2);
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            transition: color 0.3s ease;
+            text-transform: uppercase;
+        }
+        .social-strip a:hover {
+            color: var(--gold);
+        }
+        
+        .hero-grid {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+              linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px);
+            background-size: 80px 80px;
+            mask-image: radial-gradient(circle at 30% 70%, black 10%, transparent 70%);
+            -webkit-mask-image: radial-gradient(circle at 30% 70%, black 10%, transparent 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 2rem;
+            right: 0;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text2);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        .mouse {
+            width: 20px;
+            height: 32px;
+            border: 2px solid var(--text2);
+            border-radius: 12px;
+            position: relative;
+        }
+        .mouse-dot {
+            width: 4px; height: 4px;
+            background: var(--text2);
+            border-radius: 50%;
+            position: absolute;
+            top: 6px; left: 50%;
+            margin-left: -2px;
+            animation: scrollAnim 1.5s infinite;
+        }
+
+        @media (max-width: 900px) {
+            .social-strip { display: none; }
+            .hero-btns { flex-direction: column; }
+            .scroll-down { display: none; }
+            .name-2 { margin-left: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="orb orb-gold"></div>
+    <div class="orb orb-blue"></div>
+
+    <nav>
+        <a href="index.html" class="nav-logo">
+            <div class="nav-logo-box">VG</div>
+            Varun Gupta
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="certifications.html">Certs</a></li>
+        </ul>
+        <a href="connect.html" class="nav-connect">Connect</a>
+    </nav>
+
+    <div class="social-strip reveal rd3">
+        <div class="social-line"></div>
+        <a href="https://www.linkedin.com/in/varungupta004/" target="_blank">LinkedIn</a>
+        <a href="https://github.com/varungupta04" target="_blank">GitHub</a>
+        <a href="https://leetcode.com/u/varun_gupta_04/" target="_blank">LeetCode</a>
+        <div class="social-line"></div>
+    </div>
+
+    <main class="page-wrap hero page-enter">
+        <div class="hero-grid"></div>
+        
+
+
+        <h1 class="hero-name reveal rd1">
+            <span class="name-1">VARUN</span>
+            <span class="name-2 gradient-text">GUPTA</span>
+            <span class="name-3">PORTFOLIO</span>
+        </h1>
+
+        <div class="roles-row reveal rd2">
+            <div class="role-pill">Machine Learning</div>
+            <div class="role-pill">Business Analyst</div>
+            <div class="role-pill">RPA Engineer</div>
+            <div class="role-pill">Data Science</div>
+        </div>
+
+        <p class="hero-desc reveal rd2">
+            CS Graduate. Building solutions at the intersection of technology, business, and impact. Currently at WNS, previously at ITC.
+        </p>
+
+        <div class="hero-btns reveal rd3">
+            <a href="projects.html" class="btn-gold">View My Work</a>
+            <a href="about.html" class="btn-outline">About Me</a>
+        </div>
+
+        <div class="stats-bar reveal rd4">
+            <div class="glass-card stat-tile">
+                <div class="stat-num gradient-text">WNS</div>
+                <div class="stat-label">Current Role</div>
+            </div>
+            <div class="glass-card stat-tile">
+                <div class="stat-num gradient-text">VIT</div>
+                <div class="stat-label">Alma Mater</div>
+            </div>
+            <div class="glass-card stat-tile">
+                <div class="stat-num gradient-text">5+</div>
+                <div class="stat-label">Projects</div>
+            </div>
+            <div class="glass-card stat-tile">
+                <div class="stat-num gradient-text">3</div>
+                <div class="stat-label">Specializations</div>
+            </div>
+            <div class="glass-card stat-tile">
+                <div class="stat-num gradient-text">Proven</div>
+                <div class="stat-label">Teamwork</div>
+            </div>
+        </div>
+
+        <div class="scroll-down reveal rd4">
+            Explore
+            <div class="mouse">
+                <div class="mouse-dot"></div>
+            </div>
+        </div>
+    </main>
+
+    <script src="assets/shared.js"></script>
+</body>
+</html>

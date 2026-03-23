@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Varun Gupta | Projects</title>
+    <link rel="stylesheet" href="assets/shared.css">
+    <style>
+        .projects-container {
+            margin-top: 2rem;
+            background: var(--glass-border);
+            border-radius: 16px;
+            padding: 1px; /* To create 1px gap between rows via border */
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+        }
+        
+        .proj-row {
+            display: grid;
+            grid-template-columns: 70px 1fr 44px;
+            gap: 2rem;
+            align-items: center;
+            background: var(--bg2);
+            padding: 2.5rem 2rem;
+            position: relative;
+            text-decoration: none;
+            color: inherit;
+            transition: background 0.4s ease;
+        }
+
+        .proj-row:hover {
+            background: rgba(255,255,255,0.02);
+        }
+
+        .accent-bar {
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--gold) 0%, var(--gold-light) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .proj-row:hover .accent-bar {
+            opacity: 1;
+        }
+
+        .proj-num {
+            font-family: var(--font-display);
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: rgba(255,255,255,0.03);
+            line-height: 1;
+            transition: color 0.3s ease;
+        }
+
+        .proj-row:hover .proj-num {
+            color: rgba(201,168,76,0.1);
+        }
+
+        .proj-main {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .proj-meta {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text2);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .proj-title {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text);
+            transition: color 0.3s ease;
+        }
+
+        .proj-row:hover .proj-title {
+            color: var(--gold-light);
+        }
+
+        .proj-desc {
+            color: var(--text2);
+            max-width: 600px;
+            font-size: 0.95rem;
+            margin: 0.5rem 0 1rem;
+        }
+
+        .proj-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag-pill {
+            padding: 0.3rem 0.75rem;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            color: var(--text2);
+            transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .proj-row:hover .tag-pill {
+            background: rgba(201,168,76,0.05);
+            color: var(--gold-light);
+            border-color: rgba(201,168,76,0.2);
+        }
+
+        .proj-arrow {
+            width: 44px; height: 44px;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text);
+            transition: transform 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .proj-row:hover .proj-arrow {
+            transform: rotate(45deg);
+            border-color: var(--gold);
+            color: var(--gold);
+            box-shadow: 0 0 15px rgba(201,168,76,0.2);
+        }
+
+        @media (max-width: 768px) {
+            .proj-row {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                padding: 2rem 1.5rem;
+            }
+            .proj-num {
+                font-size: 2rem;
+                position: absolute;
+                top: 1rem; right: 1.5rem;
+            }
+            .proj-arrow { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="orb orb-gold"></div>
+    <div class="orb orb-blue"></div>
+
+    <nav>
+        <a href="index.html" class="nav-logo">
+            <div class="nav-logo-box">VG</div>
+            Varun Gupta
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="projects.html" class="active">Projects</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="certifications.html">Certs</a></li>
+        </ul>
+        <a href="connect.html" class="nav-connect">Connect</a>
+    </nav>
+
+    <main class="page-wrap page-enter">
+        <div class="s-label reveal">Selected Work</div>
+        <h2 class="s-title reveal rd1">Featured<br>Projects</h2>
+        <p class="s-sub reveal rd2">Showcasing a blend of Artificial Intelligence, Data Engineering, and Full-Stack Development from personal research to professional implementations.</p>
+
+        <div class="projects-container reveal rd3">
+            <!-- 01 -->
+            <a href="https://github.com/varungupta04" target="_blank" class="proj-row">
+                <div class="accent-bar"></div>
+                <div class="proj-num">01</div>
+                <div class="proj-main">
+                    <div class="proj-meta">AI · Personal Project</div>
+                    <div class="proj-title">RL Chess Bot ⭐</div>
+                    <div class="proj-desc">Designed and trained a reinforcement learning agent to play chess using Deep Q-Networks. Built an interactive GUI and tracked evaluation metrics.</div>
+                    <div class="proj-tags">
+                        <span class="tag-pill">Python</span>
+                        <span class="tag-pill">Reinforcement Learning</span>
+                        <span class="tag-pill">Pygame</span>
+                        <span class="tag-pill">Deep RL</span>
+                    </div>
+                </div>
+                <div class="proj-arrow">↗</div>
+            </a>
+            
+            <!-- 02 -->
+            <a href="https://github.com/varungupta04" target="_blank" class="proj-row">
+                <div class="accent-bar"></div>
+                <div class="proj-num">02</div>
+                <div class="proj-main">
+                    <div class="proj-meta">Full-Stack · Personal Project</div>
+                    <div class="proj-title">Bookshelf</div>
+                    <div class="proj-desc">A full-stack web application designed for book lovers. Features personalized reading tracking, AI-powered recommendations, and social sharing.</div>
+                    <div class="proj-tags">
+                        <span class="tag-pill">React</span>
+                        <span class="tag-pill">Node.js</span>
+                        <span class="tag-pill">Full-Stack</span>
+                        <span class="tag-pill">AI Recommendations</span>
+                    </div>
+                </div>
+                <div class="proj-arrow">↗</div>
+            </a>
+
+            <!-- 03 -->
+            <a href="https://www.linkedin.com/in/varungupta004/" target="_blank" class="proj-row">
+                <div class="accent-bar"></div>
+                <div class="proj-num">03</div>
+                <div class="proj-main">
+                    <div class="proj-meta">RPA · WNS · Professional</div>
+                    <div class="proj-title">Banking Automation Pipelines</div>
+                    <div class="proj-desc">Engineered robust Robotic Process Automation scripts for critical banking clients at WNS, streamlining massive data ingestion and reconciling financial records.</div>
+                    <div class="proj-tags">
+                        <span class="tag-pill">RPA</span>
+                        <span class="tag-pill">UiPath</span>
+                        <span class="tag-pill">Banking</span>
+                        <span class="tag-pill">Process Automation</span>
+                    </div>
+                </div>
+                <div class="proj-arrow">↗</div>
+            </a>
+
+            <!-- 04 -->
+            <a href="https://www.linkedin.com/in/varungupta004/" target="_blank" class="proj-row">
+                <div class="accent-bar"></div>
+                <div class="proj-num">04</div>
+                <div class="proj-main">
+                    <div class="proj-meta">Data Engineering · Internship</div>
+                    <div class="proj-title">FMCG Data Analytics · ITC</div>
+                    <div class="proj-desc">Constructed high-throughput data pipelines on Azure and built PySpark transformations to derive actionable sales insights for ITC's extensive supply chain.</div>
+                    <div class="proj-tags">
+                        <span class="tag-pill">PySpark</span>
+                        <span class="tag-pill">Azure</span>
+                        <span class="tag-pill">Python</span>
+                        <span class="tag-pill">Data Engineering</span>
+                    </div>
+                </div>
+                <div class="proj-arrow">↗</div>
+            </a>
+
+            <!-- 05 -->
+            <a href="https://github.com/varungupta04" target="_blank" class="proj-row">
+                <div class="accent-bar"></div>
+                <div class="proj-num">05</div>
+                <div class="proj-main">
+                    <div class="proj-meta">Deep Learning · Research</div>
+                    <div class="proj-title">Neural Network Training</div>
+                    <div class="proj-desc">Implemented forward and backward propagation algorithms from scratch and leveraged PyTorch to train CNN/RNN models on complex vision tasks.</div>
+                    <div class="proj-tags">
+                        <span class="tag-pill">Deep Learning</span>
+                        <span class="tag-pill">PyTorch</span>
+                        <span class="tag-pill">CNN</span>
+                        <span class="tag-pill">RNN</span>
+                        <span class="tag-pill">NumPy</span>
+                    </div>
+                </div>
+                <div class="proj-arrow">↗</div>
+            </a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-left">© 2025 · Varun Gupta · Crafted with precision</div>
+        <div class="footer-links">
+            <a href="https://www.linkedin.com/in/varungupta004/" target="_blank">LinkedIn</a>
+            <a href="https://github.com/varungupta04" target="_blank">GitHub</a>
+            <a href="https://leetcode.com/u/varun_gupta_04/" target="_blank">LeetCode</a>
+        </div>
+    </footer>
+
+    <script src="assets/shared.js"></script>
+</body>
+</html>
